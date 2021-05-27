@@ -7,6 +7,7 @@ const incrementButton = document.getElementById('buttonIncrement');
 const decrementButton = document.getElementById('buttonDecrement');
 const addTenButton = document.getElementById('buttonAddTen');
 const removeTenButton = document.getElementById('buttonRemoveTen');
+const resetButton = document.getElementById('buttonReset');
 
 const incrementAction = {
   type: 'INCREMENT'
@@ -18,15 +19,20 @@ const decrementAction = {
 const addTenAction = {
   type: 'ADD_TEN'
 };
+
 const removeTenAction = {
   type: 'REMOVE_TEN'
+};
+
+const resetAction = {
+  type: 'RESET'
 };
 
 /**
  * A counter
  * @param {number} state - The actual state
  * @param {object} action - Action to execute
- * @param {'INCREMENT' | 'DECREMENT' | 'ADD_TEN' | 'REMOVE_TEN' | string} action.type - Action to execute
+ * @param {'INCREMENT' | 'DECREMENT' | 'ADD_TEN' | 'REMOVE_TEN' | 'RESET' | string} action.type - Action to execute
  * @returns {number} - The new state
  */
 function counterReducer(state = initalState, action) {
@@ -39,6 +45,8 @@ function counterReducer(state = initalState, action) {
       return state + 10;
     case 'REMOVE_TEN':
       return state - 10;
+    case 'RESET':
+      return initalState;
     default:
       return state;
   }
@@ -64,4 +72,8 @@ addTenButton.onclick = () => {
 
 removeTenButton.onclick = () => {
   counterStore.dispatch(removeTenAction);
+};
+
+resetButton.onclick = () => {
+  counterStore.dispatch(resetAction);
 };
